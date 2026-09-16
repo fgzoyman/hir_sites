@@ -15,18 +15,18 @@ __pycache__/
 .Rhistory
 
 # Adatbázisok és nyers gyűjtések (túl nagyok a GitHubra)
-articles.db
+#articles.db
 scraped_data/
 scraped_articles/
-scraped_links_summary.csv
-cikk_megjelenesek_cimlap_rovat_bontasban.csv
+#scraped_links_summary.csv
+#cikk_megjelenesek_cimlap_rovat_bontasban.csv
 downloaded_files/
 _parses/
 .~lock.*
 
 # Futási állapotok és naplók
-*.log
-*.pid
+#*.log
+#*.pid
 
 # Nagyobb exportok (opcionális, ha nem akarod verziózni)
 conversation-export.html
