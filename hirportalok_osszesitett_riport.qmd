@@ -1,0 +1,198 @@
+---
+title: "Magyar hírportálok összehasonlító médiaelemzése"
+subtitle: "Tartalmi struktúra, rovatátfedések és címlapi mobilitás (24.hu, Blikk, Népszava, Origo, Portfolio, Vadhajtások)"
+author: "Positron Media Analytics"
+date: "2026-09-10"
+format:
+  html:
+    theme: flatly
+    toc: true
+    toc-depth: 3
+    toc-title: "Tartalomjegyzék"
+    number-sections: true
+    code-fold: true
+    code-summary: "Kód megjelenítése"
+    self-contained: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+::: {.callout-note}
+## A jelentés célja és adatháttere
+A jelen dokumentum három kulcsfontosságú szempont alapján mutatja be a hat vezető magyar hírportál működési dinamikáját:
+
+1. **Korpusz- és tartalomelemzés:** Terjedelem, tematikai fókusz (háború, gazdaság) és nyelvi hangulati index.
+2. **Címlap–rovat átfedések:** Annak mérése, hogy a címlap milyen mértékben származtatott a tematikus rovatokból.
+3. **Címlapi mobilitás és rangmozgás:** A cikkek túlélési ideje, pozícióváltozásai és fluktuációja a címlapi hierarchiában.
+
+Az elemzés a webkaparó motor által összegyűjtött **4 449 egyedi cikkre** és **9 081 pillanatkép-rekordra** támaszkodik.
+:::
+
+---
+
+# 1. Tartalmi és korpuszelemzés
+
+Az elemzéshez a cikkek Markdown törzsszövegét és metaadatait használtuk fel. A szószámon és karakterszámon kívül szótáralapú osztályozással vizsgáltuk a háborús, gazdasági kifejezések arányát, valamint a pozitív és negatív érzelmi töltetű szavak előfordulási egyensúlyát (nettó hangulatindex).
+
+```{python}
+import sqlite3
+import pandas as pd
+from analyze_corpus_expanded import load_corpus_data, analyze_article_corpus, generate_summary_and_plot
+
+df_c = load_corpus_data()
+df_res, portal_kw = analyze_article_corpus(df_c)
+summary_corpus, top_kws, _ = generate_summary_and_plot(df_res, portal_kw)
+
+display_df = summary_corpus.rename(columns={
+    "site": "Portál",
+    "cikkek_szama": "Cikkek száma",
+    "atlag_szoszam": "Átlagos szószám",
+    "median_szoszam": "Medián szószám",
+    "pozitiv_arany": "Pozitív arány (%)",
+    "negativ_arany": "Negatív arány (%)",
+    "haborus_cikkek_pct": "Háborús fókusz (%)",
+    "gazdasagi_cikkek_pct": "Gazdasági fókusz (%)",
+    "netto_hangulat": "Nettó hangulat"
+})
+display_df[["Portál", "Cikkek száma", "Átlagos szószám", "Medián szószám", "Háborús fókusz (%)", "Gazdasági fókusz (%)", "Nettó hangulat"]]
+```
+
+::: {#fig-corpus}
+![](corpus_expanded_analysis.png)
+
+A hat hírportál cikkmennyisége, medián szószáma, tematikai megoszlása és átlagos hangulati indexe.
+:::
+
+## Főbb tartalmi és formai megállapítások
+
+1. **Terjedelmi differenciálódás:**
+   * A **Portfolio** kimagaslóan a leghosszabb anyagokat közli: átlagos szószáma **1 065 szó** (medián: 938 szó), ami professzionális elemzői, háttérközlő jelleget tükröz.
+   * A **Népszava** klasszikus hír- és publicisztikai mérettel dolgozik (átlag 595 szó).
+   * A **Vadhajtások** (293 szó) és a **24.hu** (320 szó) a legrövidebb, gyorshír- és távirati jellegű szövegekkel operálnak.
+2. **Tematikai hangsúlyok:**
+   * A **Portfolio** esetében szinte az összes cikkben azonosítható gazdasági kifejezés (97%), és kétharmadában (68,6%) megjelenik a háborús kontextus is (pl. energetikai és piaci hatások).
+   * A **Népszava** kiegyensúlyozottan foglalkozik mindkét témával (24,2% háború, 40,4% gazdaság).
+3. **Hangulati és tónusbeli különbségek:**
+   * A hírportálok többsége negatív hangulati túlsúlyt mutat (Blikk -0,39, Origo -0,29, Népszava -0,28), ami megfelel a hírmédia jól ismert negatívum-fókuszának (katasztrófák, bűnügyek, infláció).
+   * A Portfolio (+1,05) a pénzügyi növekedési és piaci hírek szókészlete miatt pozitívabb szótári mérleggel zár.
+
+---
+
+# 2. Címlapi és rovatoldali lefedettség és átfedés
+
+A kutatás második fókusza a portálok belső hírarchitektúráját vizsgálja: vajon a címlap a rovatok cikkjeiből építkezik, vagy önálló, rovatoktól független címlapi tartalomfolyam működik?
+
+```{python}
+from analyze_frontpage_rovat_overlap import load_overlap_data, calculate_overlap_metrics
+
+df_snaps_ov = load_overlap_data()
+art_presence, summary_overlap = calculate_overlap_metrics(df_snaps_ov)
+
+disp_overlap = summary_overlap.rename(columns={
+    "site": "Portál",
+    "osszes_egyedi_cikk": "Összes cikk",
+    "cimlapon_megjelent": "Címlapon",
+    "rovatban_megjelent": "Rovatban",
+    "kozos_cikkek": "Közös",
+    "csak_cimlap": "Csak címlap",
+    "csak_rovat": "Csak rovat",
+    "cimlap_atfedese_rovattal_pct": "Címlap átfedése rovattal (%)",
+    "jaccard_hasonlosag_pct": "Jaccard hasonlóság (%)"
+})
+disp_overlap[["Portál", "Összes cikk", "Címlapon", "Rovatban", "Közös", "Csak címlap", "Címlap átfedése rovattal (%)", "Jaccard hasonlóság (%)"]]
+```
+
+::: {#fig-overlap}
+![](frontpage_rovat_overlap.png)
+
+Címlapi és rovatoldali cikkek megoszlása, valamint a címlapi cikkek rovatbéli lefedettségi aránya.
+:::
+
+## Architektúrális modellek
+
+* **A klasszikus sajtómodell (Népszava):** A címlapon megjelenő 227 cikkből **218 (96%)** a tematikus rovatokban is szerepel. A rovatok képezik a bázist (1 489 rovatcikk), a címlap pedig szigorúan ezek szerkesztett kirakata.
+* **A címlap-központú feed modell (Origo):** A címlapon megjelent 435 cikkből mindössze **50 cikk (11,5%)** bukkant fel a rovatokban. A főoldal itt önálló, rendkívül gyorsan forgatott bulvár- és hírfolyamként él.
+* **Vegyes modell (24.hu, Blikk, Portfolio):** A címlapi cikkek 32–50%-a jelenik meg rovatokban is, ami párhuzamos rovatfrissítéseket és direkt címlapi kiemeléseket jelez.
+
+---
+
+# 3. Címlapi mobilitás és rangmozgási dinamika
+
+A címlapi cikkek pozíciója (sorszáma a címlapon fentről lefelé) időbeli változásainak vizsgálata rávilágít a szerkesztőségek forgatási stratégiájára.
+
+```{python}
+from analyze_position_dynamics import load_snapshots_for_dynamics, calculate_position_dynamics
+
+df_snaps_dyn = load_snapshots_for_dynamics()
+df_metrics, df_site_dyn, top_rising, top_falling = calculate_position_dynamics(df_snaps_dyn)
+
+disp_dyn = df_site_dyn.rename(columns={
+    "site": "Portál",
+    "cimlapi_cikkek": "Címlapi cikkek",
+    "tobbszor_megjelent": "Több mentésben",
+    "tobb_mentes_arany_pct": "Több mentés aránya (%)",
+    "poziciot_valtott_db": "Pozíciót váltott",
+    "poziciovaltok_aranya_pct": "Pozícióváltók (%)",
+    "jelentos_emelkedes_db": "Jelentős emelkedés (≥5)",
+    "jelentos_esessel_db": "Jelentős esés (≥5)",
+    "atlagos_pozicio_szoras": "Átl. pozíciószórás",
+    "atlagos_pozicio_sav": "Átl. pozíciósáv"
+})
+disp_dyn[["Portál", "Címlapi cikkek", "Több mentés aránya (%)", "Pozícióváltók (%)", "Jelentős emelkedés (≥5)", "Jelentős esés (≥5)", "Átl. pozíciószórás", "Átl. pozíciósáv"]]
+```
+
+::: {#fig-dynamics}
+![](position_dynamics_analysis.png)
+
+Címlapi cikkek túlélési és mozgási aránya, valamint az átlagos pozíció-szórás (mobilitási index) portálonként.
+:::
+
+## Címlapi élettartam és fluktuáció
+
+1. **Magas mobilitású portálok (Portfolio, Origo):**
+   * Az átlagos pozíciószórás meghaladja a **16–17 helyezést**, az átlagos mozgási sáv pedig a **35–38 helyet**. Egy cikk a megjelenése után gyorsan átrendeződik.
+2. **Konzervatív / Ragaszkodó címlapok (Népszava, 24.hu):**
+   * A cikkek 65–74%-a több mentésen keresztül a címlapon marad. A rotáció lassabb, a hírek több órán keresztül megőrzik láthatóságukat.
+3. **Merev címlapú portálok (Blikk, Vadhajtások):**
+   * Kifejezetten alacsony szórás (2,8–3,3 helyezés), ami arra utal, hogy a cikkek ha felkerülnek a címlapra, nem vándorolnak nagy távolságokat fel és le: vagy kikerülnek, vagy a megszokott helyükön maradnak.
+
+## Kirívó mozgások: Ugró és süllyedő cikkek
+
+### Legnagyobb címlapi előrelépések (Rising articles)
+
+```{python}
+top_rising_show = top_rising.head(5)[["site", "first_order", "min_order", "max_rise", "title"]].rename(columns={
+    "site": "Portál",
+    "first_order": "Kezdő pozíció",
+    "min_order": "Legjobb pozíció",
+    "max_rise": "Ugrás (hely)",
+    "title": "Cikk címe"
+})
+top_rising_show
+```
+
+### Legnagyobb címlapi visszaesések (Falling articles)
+
+```{python}
+top_falling_show = top_falling.head(5)[["site", "first_order", "max_order", "max_drop", "title"]].rename(columns={
+    "site": "Portál",
+    "first_order": "Kezdő pozíció",
+    "max_order": "Legrosszabb pozíció",
+    "max_drop": "Visszaesés (hely)",
+    "title": "Cikk címe"
+})
+top_falling_show
+```
+
+---
+
+# 4. Összegzés és következtetések
+
+| Szempont | Elemző / Hosszú forma | Hír / Napilap jelleg | Gyorshír / Tömör | Bulvár / Címlap-fókusz |
+| :--- | :--- | :--- | :--- | :--- |
+| **Portál** | **Portfolio** | **Népszava** | **24.hu, Vadhajtások** | **Origo, Blikk** |
+| **Terjedelem** | Kiemelkedő (1000+ szó) | Közepes-hosszú (600 szó) | Rövid (250–320 szó) | Közepes (350–430 szó) |
+| **Rovatlefedettség** | Közepes (33%) | Szinte teljes (96%) | Vegyes (43–81%) | Alacsony (11%) |
+| **Címlapi mozgás** | Nagyon dinamikus (szórás: 17,7) | Stabil, tartós (szórás: 9,7) | Mérsékelt / stabil | Nagyon dinamikus (szórás: 16,6) |

@@ -1,0 +1,118 @@
+# Híroldalak rovatainak és tematikus aloldalainak URL-jei
+# Forrás: scraped_data/*.html mentések elemzése alapján
+
+[1_Origo]
+https://www.origo.hu/rovat/belpol	# Belpolitika
+https://www.origo.hu/rovat/kulpol	# Külpolitika
+https://www.origo.hu/rovat/nagyvilag	# Nagyvilág
+https://www.origo.hu/rovat/gazdasag	# Gazdaság
+https://www.origo.hu/rovat/tudomany	# Tudomány
+https://www.origo.hu/rovat/techbazis	# Techbázis
+https://www.origo.hu/sport	# Sport
+https://www.origo.hu/sport/rovat/f1	# Forma-1 / GPhírek
+https://www.origo.hu/rovat/teve	# Tévé
+https://www.origo.hu/rovat/utazas	# Utazás
+https://www.origo.hu/rovat/gasztro	# Gasztro
+https://www.origo.hu/velemeny	# Vélemény
+https://www.origo.hu/podcast	# Podcast
+https://www.origo.hu/video	# Videó
+
+[2_Nepszava]
+https://nepszava.hu/tag/belfold/	# Belföld
+https://nepszava.hu/tag/gazdasag/	# Gazdaság
+https://nepszava.hu/tag/kulfold/	# Külföld
+https://nepszava.hu/tag/velemeny/	# Vélemény
+https://nepszava.hu/tag/kultura/	# Kultúra
+https://nepszava.hu/tag/nepszava-video/	# Népszava-videó
+https://nepszava.hu/tag/fotogaleria/	# Fotógaléria
+https://nepszava.hu/tag/szep-szo/	# Szép Szó
+https://nepszava.hu/tag/visszhang/	# Visszhang
+https://nepszava.hu/tag/nyitott-mondat/	# Nyitott mondat
+https://nepszava.hu/tag/reflektor/	# Reflektor
+https://nepszava.hu/tag/bunugy-baleset/	# Bűnügy-baleset
+https://nepszava.hu/tag/sport/	# Sport
+https://nepszava.hu/tag/mozaik/	# Mozaik
+https://nepszava.hu/tag/napi-visszhang/	# Napi Visszhang
+
+[3_Huszonnegy]
+https://24.hu/belfold/	# Belföld
+https://24.hu/kulfold/	# Nagyvilág
+https://24.hu/kozelet/	# Közélet
+https://24.hu/fn/gazdasag/	# Gazdaság
+https://24.hu/kultura/	# Kultúra
+https://24.hu/tech/	# Tech
+https://24.hu/tudomany/	# Tudomány
+https://24.hu/sport/	# Sport
+https://24.hu/sport/foci/	# Foci
+https://24.hu/zoldovezet/	# Zöldövezet
+https://24.hu/elet-stilus/	# Élet-Stílus
+https://24.hu/szorakozas/	# Szórakozás
+https://24.hu/otthon/	# Otthon
+https://24.hu/video/	# Videó
+https://24.hu/extra/	# 24 Extra
+
+[4_Blikk]
+https://www.blikk.hu/aktualis	# Aktuális
+https://www.blikk.hu/aktualis/belfold	# Belföld
+https://www.blikk.hu/aktualis/kulfold	# Külföld
+https://www.blikk.hu/aktualis/krimi	# Krimi
+https://www.blikk.hu/aktualis/veszhelyzet	# Vészhelyzet
+https://www.blikk.hu/aktualis/velemeny	# Vélemény
+https://www.blikk.hu/politika	# Politika
+https://www.blikk.hu/politika/magyar-politika	# Magyar politika
+https://www.blikk.hu/politika/vilagpolitika	# Világpolitika
+https://www.blikk.hu/gazdasag	# Gazdaság
+https://www.blikk.hu/gazdasag/penz	# Pénzügyek
+https://www.blikk.hu/gazdasag/nyugdij	# Nyugdíj
+https://www.blikk.hu/gazdasag/vasarlas	# Vásárlás
+https://www.blikk.hu/cimke/rezsi	# Rezsi
+https://www.blikk.hu/sztarvilag	# Sztárvilág
+https://www.blikk.hu/sztarvilag/hazai-sztarok	# Hazai sztárok
+https://www.blikk.hu/sztarvilag/nemzetkozi-sztarok	# Nemzetközi sztárok
+https://www.blikk.hu/sztarvilag/zene	# Zene
+https://www.blikk.hu/sztarvilag/filmklikk	# Filmklikk
+https://www.blikk.hu/sport	# Sport
+https://www.blikk.hu/auto	# Autó
+https://www.blikk.hu/eletmod	# Életmód
+https://www.blikk.hu/eletmod/divat	# Divat
+https://www.blikk.hu/eletmod/tippek	# Tippek
+https://www.blikk.hu/eletmod/egeszseg	# Egészség
+https://www.blikk.hu/eletmod/vilag-titkai	# Világ titkai
+https://www.blikk.hu/eletmod/lelek	# Lélek
+https://www.blikk.hu/eletmod/utazas	# Utazás
+https://www.blikk.hu/ferfiaknak/tech	# Tech
+https://www.blikk.hu/video	# Videó
+https://www.blikk.hu/legfrissebb	# Friss hírek
+
+[5_Portfolio]
+https://www.portfolio.hu/gazdasag	# Gazdaság
+https://www.portfolio.hu/global	# Globál
+https://www.portfolio.hu/uzlet	# Üzlet
+https://www.portfolio.hu/befektetes	# Befektetés
+https://www.portfolio.hu/bank	# Bank
+https://www.portfolio.hu/deviza	# Deviza
+https://www.portfolio.hu/unios-forrasok	# Uniós források
+https://www.portfolio.hu/ingatlan	# Ingatlan
+https://www.portfolio.hu/portfolio-signature	# Signature
+https://www.portfolio.hu/premium	# Prémium cikkek
+https://www.portfolio.hu/elemzes	# Elemzés
+https://www.portfolio.hu/interju	# Interjú
+https://www.portfolio.hu/on-the-other-hand	# On the other hand
+https://www.portfolio.hu/krtk	# KRTK blog
+https://www.portfolio.hu/mkt	# MKT blog
+https://www.portfolio.hu/podcast	# Podcast
+https://www.portfolio.hu/video	# Videó
+https://www.portfolio.hu/galeria	# Galéria
+https://www.portfolio.hu/frisshirek	# Friss hírek
+https://www.portfolio.hu/en	# Portfolio English Edition
+
+[6_Vadhajtasok]
+https://www.vadhajtasok.hu/0-24	# 0 / 24
+https://www.vadhajtasok.hu/fontos	# Fontos
+https://www.vadhajtasok.hu/belfold	# Belföld
+https://www.vadhajtasok.hu/kulfold	# Külföld
+https://www.vadhajtasok.hu/velemenyek	# Vélemények
+https://www.vadhajtasok.hu/sport	# Sport
+https://www.vadhajtasok.hu/ebredj-europa	# Ébredj Európa
+https://www.vadhajtasok.hu/tortenelem	# Történelem
+https://www.vadhajtasok.hu/videok	# Videók

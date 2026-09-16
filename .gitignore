@@ -1,0 +1,33 @@
+*.pyc
+*.pyo
+__pycache__/
+.Rproj.user
+.posit/assistant
+
+# Környezet és cache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.Rproj.user
+.posit/assistant
+.DS_Store
+.Rhistory
+
+# Adatbázisok és nyers gyűjtések (túl nagyok a GitHubra)
+articles.db
+scraped_data/
+scraped_articles/
+scraped_links_summary.csv
+cikk_megjelenesek_cimlap_rovat_bontasban.csv
+downloaded_files/
+_parses/
+.~lock.*
+
+# Futási állapotok és naplók
+*.log
+*.pid
+
+# Nagyobb exportok (opcionális, ha nem akarod verziózni)
+conversation-export.html
+conversation-export.md
